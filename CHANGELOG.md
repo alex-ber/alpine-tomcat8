@@ -1,6 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.3] - 2019-09-12
+* Expose port 9001.
 
 ## [0.0.2] - 2019-09-11
 - Fixes and simplification of the usage of the ARG in ONBUILD.
