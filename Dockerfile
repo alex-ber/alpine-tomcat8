@@ -175,7 +175,7 @@ CMD catalina.sh jpda run
 #docker rmi -f run-env
 #docker rm -f runtime
 #docker build --squash . -t run-env
-#docker run --name runtime -d -p8080:8080 -p8100:8100 -p8086:8086 -p9001:9001 -h=alex run-env
+#docker run --name runtime -d -p8080:8080 -p8100:8100 -p8086:8086 -h=alex run-env
 #smoke test
 #docker exec -it $(docker ps -q -n=1) ps aux | grep java
 #docker exec -it $(docker ps -q -n=1) bash
