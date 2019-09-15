@@ -19,7 +19,7 @@ ENV CLASSPATH=$CLASSPATH:$CATALINA_HOME/common/lib
 ENV PATH=$PATH:$CATALINA_HOME/bin
 
 RUN set -ex
-RUN apk add --no-cache apr-dev=1.6.3-r1 make=4.2.1-r2 openssl-dev=1.0.2r-r0 gcc=6.4.0-r9 musl-dev=1.1.19-r11
+RUN apk add --no-cache apr-dev=1.6.3-r1 make=4.2.1-r2 openssl-dev=1.0.2t-r0 gcc=6.4.0-r9 musl-dev=1.1.19-r11
 
 #copy&paste
 ENV GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc
@@ -32,6 +32,7 @@ ENV LD_LIBRARY_PATH=${TOMCAT_NATIVE_LIBDIR}:$LD_LIBRARY_PATH
 
 #ENV setenv.sh
 ONBUILD ARG TOMCAT_SERVER_XMS
+ONBUILD ARG TOMCAT_SERVER_XMX
 ONBUILD ARG TOMCAT_SERVER_NEW_SIZE
 ONBUILD ARG TOMCAT_SERVER_MAX_NEW_SIZE
 ONBUILD ARG TOMCAT_SERVER_USERNAME
@@ -110,7 +111,7 @@ RUN set -ex && \
 
 ONBUILD RUN set -ex && \
     echo 'JAVA_HOME='$JAVA_HOME >> $CATALINA_HOME/bin/setenv.sh; \
-    echo 'JAVA_OPTS="${JAVA_OPTS} -Xms'$TOMCAT_SERVER_XMS '"' \
+    echo 'JAVA_OPTS="${JAVA_OPTS} -Xms'$TOMCAT_SERVER_XMS '"' -Xmx'$TOMCAT_SERVER_XMX '"'\
         >> $CATALINA_HOME/bin/setenv.sh; \
     echo 'JAVA_OPTS="${JAVA_OPTS} -XX:NewSize='$TOMCAT_SERVER_NEW_SIZE '-XX:MaxNewSize='$TOMCAT_SERVER_MAX_NEW_SIZE'"' \
         >> $CATALINA_HOME/bin/setenv.sh;
@@ -163,7 +164,7 @@ RUN apk del glibc-i18n make gcc musl-dev
 RUN rm -rf /var/cache/apk/*
 
 
-EXPOSE 8080 8100 8086 9001
+EXPOSE 8080 8100 8086
 
 
 #VOLUME ${CATALINA_HOME}/webapps

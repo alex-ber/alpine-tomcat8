@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+
+## [0.0.4] - 2019-09-15
+* Remove exposed port 9001.
+* Adding -Xmx flag for JVM (Tomcat).
+
+
 ## [0.0.3] - 2019-09-12
 * Expose port 9001.
 
